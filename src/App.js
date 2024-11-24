@@ -1,11 +1,14 @@
 import InputView from "./views/InputView.js";
 import OutputView from "./views/OutputView.js";
+import Validator from "./utils/Validator.js";
 
 class App {
   async play() {
     OutputView.printStartBaseballGame();
 
-    const baseballNum = await InputView.readBaseballNum();
+    const num = await InputView.readBaseballNum();
+    const numArr = num.split("").map(Number);
+    Validator.baseballNumValidation(numArr);
   }
 }
 
