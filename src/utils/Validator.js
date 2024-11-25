@@ -7,8 +7,14 @@ class Validator {
     if (numArr === isNaN) throw new Error(ERROR_MESSAGE.BASEBALL_NUM_FORMAT);
 
     let setNumArr = new Set(numArr);
-    if (Array.length !== setNumArr.length)
+    if (numArr.length !== setNumArr.size)
       throw new Error(ERROR_MESSAGE.BASEBALL_NUM_DUPLICATE);
+  }
+
+  static retryNumValidation(retry) {
+    if (retry === "") throw new Error(ERROR_MESSAGE.EMPTY_INPUT);
+    if (retry !== ("1" || "2"))
+      throw new Error(ERROR_MESSAGE.RETRY_GAME_FORMAT);
   }
 }
 

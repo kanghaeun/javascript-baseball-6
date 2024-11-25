@@ -40,6 +40,8 @@ class App {
         Console.print(OUTPUT_MESSAGE.GET_NUM_RIGHT);
         const retry = await InputView.readretry();
 
+        Validator.retryNumValidation(retry);
+
         if (retry === "2") return;
         random = RandomNum.createRandomNum();
       }
