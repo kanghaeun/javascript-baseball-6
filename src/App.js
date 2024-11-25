@@ -35,6 +35,14 @@ class App {
         Console.print(`${strike}스트라이크 ${ball}볼`);
       } else if (strike > 0) Console.print(`${strike}스트라이크`);
       else if (ball > 0) Console.print(`${ball}볼`);
+
+      if (strike === 3) {
+        Console.print(OUTPUT_MESSAGE.GET_NUM_RIGHT);
+        const retry = await InputView.readretry();
+
+        if (retry === "2") return;
+        random = RandomNum.createRandomNum();
+      }
     }
   }
 }

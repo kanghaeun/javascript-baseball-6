@@ -6,6 +6,10 @@ const InputView = {
     const baseballNum = await Console.readLineAsync(INPUT_MESSAGE.INPUT_NUM);
     return baseballNum;
   },
+  async readretry() {
+    const retryNum = await Console.readLineAsync(INPUT_MESSAGE.RETRY_GAME);
+    return retryNum;
+  },
 };
 
 export default InputView;
