@@ -12,7 +12,7 @@ class App {
     this.#gamecontroller = new BaseballGame(this.#computer, this.#matchResult);
   }
   async play() {
-    // await this.#gamecontroller.start();
+    await this.#gamecontroller.start();
   }
 }
 
