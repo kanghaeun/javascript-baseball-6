@@ -5,7 +5,7 @@ class Computer {
   #randomNumArr;
 
   constructor() {
-    this.#getRandomNum();
+    this.#generateRandomNum();
   }
 
   #setRandomNum() {
@@ -19,10 +19,14 @@ class Computer {
     return array;
   }
 
-  #getRandomNum() {
+  #generateRandomNum() {
     const randomNumArr = this.#setRandomNum();
     this.#randomNumArr = randomNumArr;
     console.log(this.#randomNumArr);
+  }
+
+  getRandomNum() {
+    return this.#randomNumArr;
   }
 }
 

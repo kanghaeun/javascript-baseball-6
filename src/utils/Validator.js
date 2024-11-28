@@ -1,9 +1,7 @@
 import { ERROR_MESSAGE } from "../constants/errorMessage.js";
 
 class Validator {
-  static baseballNum(num) {
-    const numArr = num.split("").map(Number);
-
+  static baseballNum(numArr) {
     if (numArr.length === 0) throw new Error(ERROR_MESSAGE.EMPTY_INPUT);
     if (numArr.length !== 3) throw new Error(ERROR_MESSAGE.BASEBALL_NUM_FORMAT);
     if (numArr === isNaN) throw new Error(ERROR_MESSAGE.BASEBALL_NUM_FORMAT);
@@ -11,6 +9,8 @@ class Validator {
     let setNumArr = new Set(numArr);
     if (numArr.length !== setNumArr.size)
       throw new Error(ERROR_MESSAGE.BASEBALL_NUM_DUPLICATE);
+
+    return numArr;
   }
 
   static retryNum(retry) {

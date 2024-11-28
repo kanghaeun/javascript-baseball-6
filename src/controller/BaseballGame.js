@@ -1,13 +1,19 @@
 import OutputView from "../views/OutputView.js";
 import InputView from "../views/InputView.js";
 import Validatior from "../utils/Validator.js";
+import MatchChecker from "../models/MatchChecker.js";
+
 class BaseballGame {
   #computer;
-  #matchResult;
+  #participants;
+  #result;
 
-  constructor(computer, matchResult) {
-    this.computer = computer;
-    this.matchResult = matchResult;
+  constructor(computer) {
+    this.#computer = computer;
+    this.#participants = {
+      computerNum: this.#computer.getRandomNum(),
+      userNum: undefined,
+    };
   }
 
   async start() {
@@ -19,14 +25,15 @@ class BaseballGame {
   async #getUserNum() {
     const userNum = await InputView.readBaseballNum();
     Validatior.baseballNum(userNum);
+    this.#participants.userNum = userNum;
+    this.#getGameResult();
   }
 
-  // let random = RandomNum.createRandomNum();
-  // while (true) {
-  //   const num = await InputView.readBaseballNum();
-
-  //   const numArr = num.split("").map(Number);
-  //   Validator.baseballNumValidation(numArr);
+  #getGameResult() {
+    const matchResult = new MatchChecker(this.#participants);
+    this.#result = matchResult.getGameResult();
+    OutputView.printGameResult(this.#result);
+  }
 
   //   // let strike = 0;
   //   // let ball = 0;

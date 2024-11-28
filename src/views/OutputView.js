@@ -6,27 +6,40 @@ const OutputView = {
     Console.print(OUTPUT_MESSAGE.START_GAME);
   },
 
-  printRightBallStrike(ball, strike) {
-    Console.print(
-      `${ball}${OUTPUT_MESSAGE.BALL} ${strike}${OUTPUT_MESSAGE.STRIKE}`
-    );
+  printGameResult(score) {
+    if (score.nothing === 3) Console.print(OUTPUT_MESSAGE.NOTSING);
+
+    if (score.strike > 0 && score.ball > 0) {
+      Console.print(
+        `${score.ball}${OUTPUT_MESSAGE.BALL} ${score.strike}${OUTPUT_MESSAGE.STRIKE}`
+      );
+    } else if (score.strike > 0)
+      Console.print(`${strike}${OUTPUT_MESSAGE.STRIKE}`);
+    else if (score.ball > 0)
+      Console.print(`${score.ball}${OUTPUT_MESSAGE.BALL}`);
   },
 
-  printRightStrike(strike) {
-    Console.print(`${strike}${OUTPUT_MESSAGE.STRIKE}`);
-  },
+  // printRightBallStrike(ball, strike) {
+  //   Console.print(
+  //     `${ball}${OUTPUT_MESSAGE.BALL} ${strike}${OUTPUT_MESSAGE.STRIKE}`
+  //   );
+  // },
 
-  printRightBall(ball) {
-    Console.print(`${ball}${OUTPUT_MESSAGE.BALL}`);
-  },
+  // printRightStrike(strike) {
+  //   Console.print(`${strike}${OUTPUT_MESSAGE.STRIKE}`);
+  // },
 
-  printNothing() {
-    Console.print(OUTPUT_MESSAGE.NOTSING);
-  },
+  // printRightBall(ball) {
+  //   Console.print(`${ball}${OUTPUT_MESSAGE.BALL}`);
+  // },
 
-  printRightAllNum() {
-    Console.print(OUTPUT_MESSAGE.GET_NUM_RIGHT);
-  },
+  // printNothing() {
+  //   Console.print(OUTPUT_MESSAGE.NOTSING);
+  // },
+
+  // printRightAllNum() {
+  //   Console.print(OUTPUT_MESSAGE.GET_NUM_RIGHT);
+  // },
 };
 
 export default OutputView;
