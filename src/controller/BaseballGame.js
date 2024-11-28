@@ -2,6 +2,7 @@ import OutputView from "../views/OutputView.js";
 import InputView from "../views/InputView.js";
 import Validatior from "../utils/Validator.js";
 import MatchChecker from "../models/MatchChecker.js";
+import Computer from "../models/Computer.js";
 
 class BaseballGame {
   #computer;
@@ -26,43 +27,45 @@ class BaseballGame {
     const userNum = await InputView.readBaseballNum();
     Validatior.baseballNum(userNum);
     this.#participants.userNum = userNum;
+
     this.#getGameResult();
   }
 
+  //야구 게임 한 판 결과 출력하기
   #getGameResult() {
     const matchResult = new MatchChecker(this.#participants);
     this.#result = matchResult.getGameResult();
     OutputView.printGameResult(this.#result);
+
+    this.#checkAllStrike();
   }
 
-  //   // let strike = 0;
-  //   // let ball = 0;
-  //   // let notsing = 0;
+  //다 맞추었는지 확인
+  async #checkAllStrike() {
+    if (this.#result.strike === 3) {
+      await this.#clear();
+    } else await this.#getUserNum();
+  }
 
-  //   //컴퓨터와 나의 값 비교
-  //   for (let i = 0; i < numArr.length; i++) {
-  //     if (random.includes(numArr[i])) {
-  //       if (random.indexOf(numArr[i]) === numArr.indexOf(numArr[i])) {
-  //         strike += 1;
-  //       } else ball += 1;
-  //     } else notsing += 1;
-  //   }
+  //3스트라이크일 경우
+  #clear() {
+    OutputView.printRightAllNum();
+    this.#checkRetry();
+  }
 
-  //   if (notsing === 3) OutputView.printNothing();
-  //   if (strike > 0 && ball > 0) {
-  //     OutputView.printRightBallStrike(ball, strike);
-  //   } else if (strike > 0) OutputView.printRightStrike(strike);
-  //   else if (ball > 0) OutputView.printRightBall(ball);
+  //다시 시도할 건지
+  async #checkRetry() {
+    const retry = await InputView.readretry();
+    Validatior.retryNum(retry);
+    if (retry === "2") this.#exit();
+    else this.#retry();
+  }
 
-  //   if (strike === 3) {
-  //     OutputView.printRightAllNum();
-  //     const retry = await InputView.readretry();
+  #retry() {
+    this.#participants.computerNum = new Computer().getRandomNum();
+    this.#getUserNum();
+  }
 
-  //     Validator.retryNumValidation(retry);
-
-  //     if (retry === "2") return;
-  //     random = RandomNum.createRandomNum();
-  //   }
-  // }
+  #exit() {}
 }
 export default BaseballGame;
